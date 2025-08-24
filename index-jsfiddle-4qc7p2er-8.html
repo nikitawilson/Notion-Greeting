@@ -1,127 +1,138 @@
 <!DOCTYPE html>
-<html>
-
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Display a clock, greeting, and quote on a widget</title>
+  <meta charset="UTF-8">
+  <title>Greeting Widget</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@400;700&family=Parisienne&display=swap" rel="stylesheet">
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Parisienne&family=Bodoni+Moda:wght@400;700&display=swap');
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: 'Bodoni Moda', serif;
+    }
 
-  body {
-    margin: 0;
-    background: white;
-    text-align: center;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+    #widget {
+      background-color: #d6bfa3; /* light brown */
+      padding: 30px 50px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+      min-width: 300px;
+    }
 
-  #widget {
-    background: #f7ede2;
-    border-radius: 20px;
-    padding: 25px 35px;
-    box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
-    max-width: 360px;
-  }
+    #greet {
+      font-family: 'Parisienne', cursive;
+      font-size: 2.5em;
+      color: #5e4637;
+      margin-bottom: 15px;
+    }
 
-  #greet {
-    font-family: 'Parisienne', cursive;
-    font-size: 2em;
-    margin-bottom: 10px;
-    color: #3d2c2e;
-  }
+    #clock {
+      font-family: 'Bodoni Moda', serif;
+      font-size: 2em;
+      color: #5e4637;
+      margin-bottom: 10px;
+    }
 
-#date {
-  font-family: 'Bodoni Moda', serif;
-  font-size: 1em;
-  color: #5e4637;
-  margin-bottom: 10px;
-}
+    #clock span {
+      padding: 0 5px;
+    }
 
-  #clock {
-    font-family: 'Bodoni Moda', serif;
-    font-size: 1.5em;
-    margin-bottom: 15px;
-    color: #5e4637;
-  }
+    #date {
+      font-family: 'Bodoni Moda', serif;
+      font-size: 1.2em;
+      color: #5e4637;
+      margin-bottom: 15px;
+    }
 
-  /* Add spacing between hours, minutes, and seconds */
-  #clock span {
-    display: inline-block;
-    min-width: 28px; /* adjust for spacing */
-    text-align: center;
-  }
-
-  #quote {
-    font-family: 'Bodoni Moda', serif;
-    font-size: 1.1em;
-    color: #4b3c35;
-    font-style: italic;
-  }
+    #quote {
+      font-family: 'Bodoni Moda', serif;
+      font-size: 1em;
+      font-style: italic;
+      color: #4b3726;
+      min-height: 20px;
+      transition: opacity 0.5s;
+    }
   </style>
-
-  
 </head>
 <body>
-<div id="widget">
-  <div id="greet"></div>
-  <div id="clock">
-    <span id="hours"></span>:
-    <span id="minutes"></span>:
-    <span id="seconds"></span>
+  <div id="widget">
+    <div id="greet"></div>
+    <div id="clock">
+      <span id="hours"></span> : 
+      <span id="minutes"></span> : 
+      <span id="seconds"></span>
+    </div>
+    <div id="date"></div>
+    <div id="quote"></div>
   </div>
-  <div id="date"></div> <!-- NEW: Date -->
-  <div id="quote"></div>
-</div>
 
   <script>
-    function updateGreeting() {
-  const now = new Date();
-  const hrs = now.getHours();
-  let greet;
+    const greetEl = document.getElementById('greet');
+    const hoursEl = document.getElementById('hours');
+    const minutesEl = document.getElementById('minutes');
+    const secondsEl = document.getElementById('seconds');
+    const dateEl = document.getElementById('date');
+    const quoteEl = document.getElementById('quote');
 
-  if (hrs < 12) {
-    greet = "☀️ Good Morning";
-  } else if (hrs < 18) {
-    greet = "🌤️ Good Afternoon";
-  } else {
-    greet = "🌙 Good Evening";
-  }
+    const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+    const quotes = [
+      "This is the day the Lord has made; let us rejoice and be glad in it. – Psalm 118:24",
+      "Your word is a lamp to my feet and a light to my path- Psalm 119:105",
+      "Find moments of stillness",
+      "Rejoice always, pray continually, give thanks. – 1 Thessalonians 5:16-18"
+      "His grace is sufficient, for His power is made perfect in weakness. – 2 Corinthians 12:9"
+    ];
 
-  document.getElementById("greet").innerText = greet;
-}
+    let quoteIndex = 0;
 
-function updateClock() {
-  const now = new Date();
-  
-  // Time
-  const hours = now.getHours().toString().padStart(2,'0');
-  const minutes = now.getMinutes().toString().padStart(2,'0');
-  const seconds = now.getSeconds().toString().padStart(2,'0');
+    function updateClock() {
+      const now = new Date();
+      const hrs = now.getHours();
+      const mins = now.getMinutes();
+      const secs = now.getSeconds();
 
-  document.getElementById('hours').innerText = hours;
-  document.getElementById('minutes').innerText = minutes;
-  document.getElementById('seconds').innerText = seconds;
+      hoursEl.textContent = String(hrs).padStart(2,'0');
+      minutesEl.textContent = String(mins).padStart(2,'0');
+      secondsEl.textContent = String(secs).padStart(2,'0');
 
-  // Date
-  const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-  const dayOfWeek = weekday[now.getDay()];
-  const day = now.getDate();
-  const month = now.getMonth() + 1;
-  const year = now.getFullYear();
+      // Greeting
+      let greet;
+      if (hrs < 12) greet = "Good Morning";
+      else if (hrs < 17) greet = "Good Afternoon";
+      else greet = "Good Evening";
+      greetEl.textContent = greet;
 
-  document.getElementById('date').innerText = `${dayOfWeek}, ${day}/${month}/${year}`;
-}
+      // Date
+      const dayOfWeek = weekday[now.getDay()];
+      const day = now.getDate();
+      const month = now.getMonth() + 1;
+      const year = now.getFullYear();
+      dateEl.textContent = `${dayOfWeek}, ${day}/${month}/${year}`;
+    }
 
-// Initialize
-updateClock();
-setInterval(updateClock, 1000);
+    function updateQuote() {
+      quoteEl.style.opacity = 0;
+      setTimeout(() => {
+        quoteEl.textContent = quotes[quoteIndex];
+        quoteEl.style.opacity = 1;
+        quoteIndex = (quoteIndex + 1) % quotes.length;
+      }, 500);
+    }
+
+    // Initialize
+    updateClock();
+    updateQuote();
+    setInterval(updateClock, 1000);
+    setInterval(updateQuote, 5000); // change quote every 5s
   </script>
 </body>
 </html>
-
-
