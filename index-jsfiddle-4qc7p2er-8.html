@@ -60,13 +60,14 @@
   
 </head>
 <body>
-  <div id="widget">
+<div id="widget">
   <div id="greet"></div>
   <div id="clock">
     <span id="hours"></span>:
     <span id="minutes"></span>:
     <span id="seconds"></span>
   </div>
+  <div id="date"></div> <!-- NEW: Date -->
   <div id="quote"></div>
 </div>
 
@@ -114,6 +115,7 @@ function updateQuote() {
 updateGreeting();
 updateQuote();
 updateClock();
+
 setInterval(updateClock, 1000);
   </script>
 </body>
