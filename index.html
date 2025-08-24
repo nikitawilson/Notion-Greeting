@@ -65,14 +65,14 @@
 </head>
 <body>
   <div id="widget">
-    <div id="greet"></div>
+    <div id="greet">Hello!</div>
     <div id="clock">
-      <span id="hours"></span> : 
-      <span id="minutes"></span> : 
-      <span id="seconds"></span>
+      <span id="hours">00</span> : 
+      <span id="minutes">00</span> : 
+      <span id="seconds">00</span>
     </div>
-    <div id="date"></div>
-    <div id="quote"></div>
+    <div id="date">Loading date...</div>
+    <div id="quote">Loading quote...</div>
   </div>
 
   <script>
@@ -86,10 +86,13 @@
     const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
     const quotes = [
       "This is the day the Lord has made; let us rejoice and be glad in it. – Psalm 118:24",
-      "Your word is a lamp to my feet and a light to my path- Psalm 119:105",
-      "Find moments of stillness",
-      "Rejoice always, pray continually, give thanks. – 1 Thessalonians 5:16-18"
-      "His grace is sufficient, for His power is made perfect in weakness. – 2 Corinthians 12:9"
+      "Make today amazing, for God is with you.",
+      "Trust in the Lord for a wonderful day ahead.",
+      "The joy of the Lord is your strength. – Nehemiah 8:10",
+      "I can do all things through Christ who strengthens me. – Philippians 4:13",
+      "Be strong and courageous. – Joshua 1:9",
+      "Do everything today with love and purpose. – 1 Corinthians 16:14",
+      "Rejoice today, for the Lord is your guide. – 1 Thessalonians 5:16-18"
     ];
 
     let quoteIndex = 0;
@@ -132,7 +135,7 @@
     updateClock();
     updateQuote();
     setInterval(updateClock, 1000);
-    setInterval(updateQuote, 5000); // change quote every 5s
+    setInterval(updateQuote, 5000);
   </script>
 </body>
 </html>
