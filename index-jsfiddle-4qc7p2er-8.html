@@ -90,33 +90,30 @@
 
 function updateClock() {
   const now = new Date();
-  const hours = now.getHours().toString().padStart(2, '0');
-  const minutes = now.getMinutes().toString().padStart(2, '0');
-  const seconds = now.getSeconds().toString().padStart(2, '0');
+  
+  // Time
+  const hours = now.getHours().toString().padStart(2,'0');
+  const minutes = now.getMinutes().toString().padStart(2,'0');
+  const seconds = now.getSeconds().toString().padStart(2,'0');
 
   document.getElementById('hours').innerText = hours;
   document.getElementById('minutes').innerText = minutes;
   document.getElementById('seconds').innerText = seconds;
-}
 
-function updateQuote() {
-  const quotes = [
-    "✨ Take a deep breath.",
-    "🌱 Small steps bring big change.",
-    "☕ One sip at a time.",
-    "📖 Your story is unfolding.",
-    "🌸 Stay soft, stay strong."
-  ];
-  const random = Math.floor(Math.random() * quotes.length);
-  document.getElementById("quote").innerText = quotes[random];
+  // Date
+  const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+  const dayOfWeek = weekday[now.getDay()];
+  const day = now.getDate();
+  const month = now.getMonth() + 1;
+  const year = now.getFullYear();
+
+  document.getElementById('date').innerText = `${dayOfWeek}, ${day}/${month}/${year}`;
 }
 
 // Initialize
-updateGreeting();
-updateQuote();
 updateClock();
-
 setInterval(updateClock, 1000);
   </script>
 </body>
 </html>
+
