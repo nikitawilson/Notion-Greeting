@@ -20,7 +20,7 @@
     }
 
     #widget {
-      background-color: #d6bfa3; /* light brown */
+      background-color: #f5ebe0; /* much lighter brown */
       padding: 30px 50px;
       border-radius: 20px;
       text-align: center;
@@ -35,22 +35,22 @@
       margin-bottom: 15px;
     }
 
-    #clock {
+    #date {
       font-family: 'Bodoni Moda', serif;
-      font-size: 2em;
+      font-size: 1.5em; /* bigger than time */
       color: #5e4637;
       margin-bottom: 10px;
     }
 
-    #clock span {
-      padding: 0 5px;
-    }
-
-    #date {
+    #clock {
       font-family: 'Bodoni Moda', serif;
-      font-size: 1.2em;
+      font-size: 1.2em; /* smaller than date */
       color: #5e4637;
       margin-bottom: 15px;
+    }
+
+    #clock span {
+      padding: 0 5px;
     }
 
     #quote {
@@ -66,12 +66,12 @@
 <body>
   <div id="widget">
     <div id="greet">Hello!</div>
+    <div id="date">Loading date...</div>
     <div id="clock">
       <span id="hours">00</span> : 
       <span id="minutes">00</span> : 
       <span id="seconds">00</span>
     </div>
-    <div id="date">Loading date...</div>
     <div id="quote">Loading quote...</div>
   </div>
 
@@ -84,15 +84,17 @@
     const quoteEl = document.getElementById('quote');
 
     const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+    const monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+
     const quotes = [
       "This is the day the Lord has made; let us rejoice and be glad in it. – Psalm 118:24",
-      "Make today amazing, for God is with you.",
-      "Trust in the Lord for a wonderful day ahead.",
+      "Your word is a lamp to my feet and a light to my path. - Psalm 119:105",
       "The joy of the Lord is your strength. – Nehemiah 8:10",
       "I can do all things through Christ who strengthens me. – Philippians 4:13",
       "Be strong and courageous. – Joshua 1:9",
       "Do everything today with love and purpose. – 1 Corinthians 16:14",
       "Rejoice today, for the Lord is your guide. – 1 Thessalonians 5:16-18"
+      "His grace is sufficient, for His power is made perfect in weakness. – 2 Corinthians 12:9"
     ];
 
     let quoteIndex = 0;
@@ -114,12 +116,12 @@
       else greet = "Good Evening";
       greetEl.textContent = greet;
 
-      // Date
+      // Full date in words
       const dayOfWeek = weekday[now.getDay()];
       const day = now.getDate();
-      const month = now.getMonth() + 1;
+      const month = monthNames[now.getMonth()];
       const year = now.getFullYear();
-      dateEl.textContent = `${dayOfWeek}, ${day}/${month}/${year}`;
+      dateEl.textContent = `${dayOfWeek}, ${month} ${day}, ${year}`;
     }
 
     function updateQuote() {
