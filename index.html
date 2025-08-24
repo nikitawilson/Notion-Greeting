@@ -11,7 +11,7 @@
     body {
       margin: 0;
       padding: 0;
-      background-color: #fffaf6;
+      background-color: #ffffff; /* page background */
       display: flex;
       justify-content: center;
       align-items: center;
@@ -20,7 +20,7 @@
     }
 
     #widget {
-      background-color: #fffaf6;
+      background-color: #fffaf6; /* widget background */
       padding: 30px 50px;
       border-radius: 20px;
       text-align: center;
@@ -120,7 +120,7 @@
       const year = now.getFullYear();
       dateEl.textContent = `${dayOfWeek}, ${month} ${day}, ${year}`;
 
-      // Set quote based on day of the year
+      // Quote for the day
       const start = new Date(now.getFullYear(), 0, 0);
       const diff = now - start;
       const oneDay = 1000 * 60 * 60 * 24;
