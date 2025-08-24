@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Display a clock, greeting, and quote on a widget</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Parisienne&family=Bodoni+Moda:wght@400;700&display=swap');
+
+  body {
+    margin: 0;
+    background: white;
+    text-align: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #widget {
+    background: #f7ede2;
+    border-radius: 20px;
+    padding: 25px 35px;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+    max-width: 360px;
+  }
+
+  #greet {
+    font-family: 'Parisienne', cursive;
+    font-size: 2em;
+    margin-bottom: 10px;
+    color: #3d2c2e;
+  }
+
+  #clock {
+    font-family: 'Bodoni Moda', serif;
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    color: #5e4637;
+  }
+
+  /* Add spacing between hours, minutes, and seconds */
+  #clock span {
+    display: inline-block;
+    min-width: 28px; /* adjust for spacing */
+    text-align: center;
+  }
+
+  #quote {
+    font-family: 'Bodoni Moda', serif;
+    font-size: 1.1em;
+    color: #4b3c35;
+    font-style: italic;
+  }
+  </style>
+
+  
+</head>
+<body>
+  <div id="widget">
+  <div id="greet"></div>
+  <div id="clock">
+    <span id="hours"></span>:
+    <span id="minutes"></span>:
+    <span id="seconds"></span>
+  </div>
+  <div id="quote"></div>
+</div>
+
+  <script>
+    function updateGreeting() {
+  const now = new Date();
+  const hrs = now.getHours();
+  let greet;
+
+  if (hrs < 12) {
+    greet = "☀️ Good Morning";
+  } else if (hrs < 18) {
+    greet = "🌤️ Good Afternoon";
+  } else {
+    greet = "🌙 Good Evening";
+  }
+
+  document.getElementById("greet").innerText = greet;
+}
+
+function updateClock() {
+  const now = new Date();
+  const hours = now.getHours().toString().padStart(2, '0');
+  const minutes = now.getMinutes().toString().padStart(2, '0');
+  const seconds = now.getSeconds().toString().padStart(2, '0');
+
+  document.getElementById('hours').innerText = hours;
+  document.getElementById('minutes').innerText = minutes;
+  document.getElementById('seconds').innerText = seconds;
+}
+
+function updateQuote() {
+  const quotes = [
+    "✨ Take a deep breath.",
+    "🌱 Small steps bring big change.",
+    "☕ One sip at a time.",
+    "📖 Your story is unfolding.",
+    "🌸 Stay soft, stay strong."
+  ];
+  const random = Math.floor(Math.random() * quotes.length);
+  document.getElementById("quote").innerText = quotes[random];
+}
+
+// Initialize
+updateGreeting();
+updateQuote();
+updateClock();
+setInterval(updateClock, 1000);
+  </script>
+</body>
+</html>
