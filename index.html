@@ -11,7 +11,7 @@
     body {
       margin: 0;
       padding: 0;
-      background-color: white;
+      background-color: #fffaf6;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -20,7 +20,7 @@
     }
 
     #widget {
-      background-color: #f5ebe0; /* much lighter brown */
+      background-color: #fffaf6;
       padding: 30px 50px;
       border-radius: 20px;
       text-align: center;
@@ -31,21 +31,21 @@
     #greet {
       font-family: 'Parisienne', cursive;
       font-size: 2.5em;
-      color: #5e4637;
+      color: #4d1401;
       margin-bottom: 15px;
     }
 
     #date {
       font-family: 'Bodoni Moda', serif;
-      font-size: 1.5em; /* bigger than time */
-      color: #5e4637;
+      font-size: 1.5em;
+      color: #4d1401;
       margin-bottom: 10px;
     }
 
     #clock {
       font-family: 'Bodoni Moda', serif;
-      font-size: 1.2em; /* smaller than date */
-      color: #5e4637;
+      font-size: 1.2em;
+      color: #4d1401;
       margin-bottom: 15px;
     }
 
@@ -57,9 +57,8 @@
       font-family: 'Bodoni Moda', serif;
       font-size: 1em;
       font-style: italic;
-      color: #4b3726;
-      min-height: 20px;
-      transition: opacity 0.5s;
+      color: #4d1401;
+      min-height: 30px;
     }
   </style>
 </head>
@@ -88,7 +87,7 @@
 
     const quotes = [
       "This is the day the Lord has made; let us rejoice and be glad in it. – Psalm 118:24",
-      "Your word is a lamp to my feet and a light to my path. - Psalm 119:105",
+      "Your word is a lamp to my feet and a light to my path. – Psalm 119:105",
       "The joy of the Lord is your strength. – Nehemiah 8:10",
       "I can do all things through Christ who strengthens me. – Philippians 4:13",
       "Be strong and courageous. – Joshua 1:9",
@@ -96,8 +95,6 @@
       "Rejoice today, for the Lord is your guide. – 1 Thessalonians 5:16-18",
       "His grace is sufficient, for His power is made perfect in weakness. – 2 Corinthians 12:9"
     ];
-
-    let quoteIndex = 0;
 
     function updateClock() {
       const now = new Date();
@@ -122,23 +119,19 @@
       const month = monthNames[now.getMonth()];
       const year = now.getFullYear();
       dateEl.textContent = `${dayOfWeek}, ${month} ${day}, ${year}`;
-    }
 
-    function updateQuote() {
-      quoteEl.style.opacity = 0;
-      setTimeout(() => {
-        quoteEl.textContent = quotes[quoteIndex];
-        quoteEl.style.opacity = 1;
-        quoteIndex = (quoteIndex + 1) % quotes.length;
-      }, 500);
+      // Set quote based on day of the year
+      const start = new Date(now.getFullYear(), 0, 0);
+      const diff = now - start;
+      const oneDay = 1000 * 60 * 60 * 24;
+      const dayOfYear = Math.floor(diff / oneDay);
+      const quoteIndex = dayOfYear % quotes.length;
+      quoteEl.textContent = quotes[quoteIndex];
     }
 
     // Initialize
     updateClock();
-    updateQuote();
     setInterval(updateClock, 1000);
-    setInterval(updateQuote, 5000);
   </script>
 </body>
 </html>
-
